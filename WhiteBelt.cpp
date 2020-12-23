@@ -30,6 +30,8 @@ int main()
 
    map <string, vector<string>> l_mGlobalBus;
 
+   vector<string> comnd = {"NEW_BUS", "36", "A", "B", "C", "NEW_BUS", "47", "G", "H", "A", "B", ""};
+
    while(l_iComandCount--)
    {
       string l_sComand;
@@ -69,20 +71,37 @@ int main()
 
       if(l_sComand == "STOPS_FOR_BUS")
       {
-         string l_sInputName;
-         cin >> l_sInputName;
-         bool l_bResult = false;
-
-         vector<string> l_vStops = l_mGlobalBus[l_sInputName];
-         if(l_vStops.size())
+         string Bus;
+         cin >> Bus;
+         vector<string> temp_stops = l_mGlobalBus[Bus];
+         map<string, vector<string>> result;
+         for(auto stop_start : temp_stops)
          {
-            for(auto& l_sStop : l_vStops)
+            for(auto stop : l_mGlobalBus)
             {
-               
+               for(auto stp : stop.second)
+               {
+                  result[stop_start];
+                  if(stop_start == stp && Bus != stop.first)
+                  {
+                     result[stop_start].push_back(stop.first);
+                  }
+               }
             }
          }
-
-
+         for(auto item : result)
+         {
+            std::cout << item.first+":";
+            for(auto item2 : item.second)
+            {
+               std::cout << item2 + " ";
+            }
+            if(item.second.empty())
+            {
+               std::cout << " no onterchange";
+            }
+            std::cout << endl;
+         }
       }
 
    }
